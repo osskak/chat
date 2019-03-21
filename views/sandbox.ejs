@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+  </head>
+  <body>
+    <div>
+      <div><%if (url){%> URL : <%=url%><%}%></div>
+      <div>
+        <%if (response){%>
+        <pre>Response : <%-response %></pre>
+        <%}%>
+      </div>
+    </div>
+    <form action="/sandbox" method="get" id="sandbox-form">
+      <select name="selected_operation" id="operation" required="required">
+        <option value="-1">—</option>
+        <% Object.keys(operations).forEach(property => { %>
+        <option value="<%=property%>"
+                <%if (property === query['selected_operation']){%>selected="selected"<%}%>
+        ><%=operations[property].label%></option>
+        <% }); %>
+      </select>
+      <input type="number" name="page" placeholder="Enter needed page" <%if (query.page) {%> value="<%=query.page%>" <%}%>>
+      <input type="text" name="text" placeholder="Type a message" <%if (query.text) {%> value="<%=query.text%>" <%}%>>
+      <input type="email" name="email" placeholder="Enter the email" <%if (query.email) {%> value="<%=query.email%>" <%}%>>
+      <input type="text" pattern="^[a-z0-9]+$" name="id" placeholder="Enter the identifier" <%if (query.id) {%> value="<%=query.id%>" <%}%>>
+      <button type="submit">Submit</button>
+  </form>
+  <script src="/javascripts/main.js"></script>
+  </body>
+</html>
+

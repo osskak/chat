@@ -1,0 +1,12 @@
+{
+  "address": "http://localhost",
+  "port": 3001,
+  "debug" : "production",
+  "api" : {
+    "path" : "/api/messages/"
+  },
+  "mongodb": {
+    "debug" : true,
+    "uri" : "mongodb://localhost/chat"
+  }
+}
