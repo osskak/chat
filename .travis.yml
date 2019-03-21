@@ -7,3 +7,9 @@ node_js:
 branches:
   only:
     - master
+
+deploy:
+  provider: heroku
+  app: "task-chat-ap"
+  api_key:
+    secure: "4d4666ff-4965-422e-8427-9a76a3e08680"
