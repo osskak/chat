@@ -5,7 +5,9 @@ const config = require('../config');
 mongoose.set('useCreateIndex', true);
 mongoose.set('debug', config.get('mongodb:debug'));
 mongoose.plugin(beautifyUnique);
-mongoose.connect(config.get('mongodb:uri'), { useNewUrlParser: true }, err => {
+
+const URI = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || config.get('mongodb:uri');
+mongoose.connect(URI, { useNewUrlParser: true }, err => {
     if (err) console.error(err);
     else console.log('successfully connected');
 });
