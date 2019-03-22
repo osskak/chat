@@ -28,30 +28,30 @@ router.get('/list/:page', (req, res, next) => {
     page = isNaN(page) ? 0 : parseInt(page, 10);
 
     Message.find()
-        .sort('-id')
+        .sort({data : 'asc'})
         .skip(page * limit)
         .limit(limit)
         .exec((err, data) => {
             if (err) return sendError(res, err);
 
-            if (data) response(res, 200, false, data);
-            else response(res, 404, 'Not found', data);
+            if (data && data.length) response(res, 200, false, data);
+            else response(res, 404, 'Not found', null);
         });
 });
 
 // get single message
 router.get('/single/:id', (req, res, next) => {
     const {id} = req.params;
-    console.log('checkId', checkId(id));
+
     if (!checkId(id)) {
-        return response(res, 404, 'Invalid identifier', null);
+        return response(res, 404, 'Not found', null);
     }
 
     Message.findById(id, (err, message) => {
         if (err) return sendError(res, err);
 
-        if (message) response(res, 200, false, message);
-        else response(res, 404, 'Not found', message);
+        if (message && Object.keys(message).length) response(res, 200, false, message);
+        else response(res, 404, 'Not found', null);
     });
 });
 
@@ -81,8 +81,8 @@ router.post('/', (req, res, next) => {
     message.save((err, message) => {
         if (err) return sendError(res, err);
 
-        if (message) response(res, 200, false, message);
-        else response(res, 500, 'Internal Server Error', message);
+        if (message && Object.keys(message).length) response(res, 200, false, message);
+        else response(res, 500, 'Internal Server Error', null);
     });
 });
 
