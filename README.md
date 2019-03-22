@@ -1,1 +1,2 @@
-# chat API
+# Chat API
+# You can find documentation at Wiki page.
