@@ -1,4 +1,4 @@
-const mongoose = require('../libs/mongoose');
+const mongoose = require('../../libs/mongoose');
 
 const messageSchema = new mongoose.Schema({
     author: {
